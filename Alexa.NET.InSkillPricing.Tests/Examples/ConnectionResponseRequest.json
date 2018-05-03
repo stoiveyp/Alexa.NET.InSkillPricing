@@ -1,0 +1,15 @@
+﻿{
+  "type": "Connections.Response",
+  "requestId": "string",
+  "name": "Upsell",
+  "status": {
+    "code": "200",
+    "message": "test message"
+  },
+  "payload": {
+    "purchaseResult": "ACCEPTED",
+    "productId": "amzn1.productId",
+    "message": "optional additional message"
+  },
+  "token": "token"
+}

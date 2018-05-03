@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Alexa.NET.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -26,7 +27,6 @@ namespace Alexa.NET.InSkillPricing.Tests
             {
                 return new JsonSerializer().Deserialize<T>(reader);
             }
-
         }
 
         public static string ExampleFileContent(string expectedFile)

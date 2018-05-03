@@ -21,6 +21,9 @@
     <None Update="Examples\BuyDirective.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\ConnectionResponseRequest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\InSkillProduct.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
