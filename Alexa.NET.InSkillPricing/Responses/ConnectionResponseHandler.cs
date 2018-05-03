@@ -18,12 +18,12 @@ namespace Alexa.NET.InSkillPricing.Responses
             return new ConnectionResponseRequest();
         }
 
-        public void AddToRequestConverter()
+        public static void AddToRequestConverter()
         {
             if (RequestConverter.RequestConverters.Where(rc => rc != null)
                 .All(rc => rc.GetType() != typeof(ConnectionResponseHandler)))
             {
-                RequestConverter.RequestConverters.Add(this);
+                RequestConverter.RequestConverters.Add(new ConnectionResponseHandler());
             }
         }
     }

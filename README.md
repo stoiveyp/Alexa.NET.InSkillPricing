@@ -31,3 +31,11 @@ var response = ResponseBuilder.Empty();
 response.Response.ShouldEndSession = true;
 
 response.Response.Directives.Add(buyDirective);
+```
+
+## Add Request Handler support
+```csharp
+using Alexa.NET.InSkillPricing.Responses
+...
+ConnectionResponseHandler.AddToRequestConverter();
+```

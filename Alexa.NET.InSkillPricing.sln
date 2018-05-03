@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.InSkillPricing", "Alexa.NET.InSkillPricing\Alexa.NET.InSkillPricing.csproj", "{12DB4181-2A99-45B2-8F56-FCE451D86A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.InSkillPricing", "Alexa.NET.InSkillPricing\Alexa.NET.InSkillPricing.csproj", "{12DB4181-2A99-45B2-8F56-FCE451D86A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.InSkillPricing.Tests", "Alexa.NET.InSkillPricing.Tests\Alexa.NET.InSkillPricing.Tests.csproj", "{711C5545-6869-47E4-B685-9BEE6DB4D749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.InSkillPricing.Tests", "Alexa.NET.InSkillPricing.Tests\Alexa.NET.InSkillPricing.Tests.csproj", "{711C5545-6869-47E4-B685-9BEE6DB4D749}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A99BC977-0CC6-4EA4-83E4-8434C996E6F0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
