@@ -19,3 +19,15 @@ using Alexa.NET.InSkillPricing
 var client = new InSkillProductsClient(skillRequest);
 var product = client.GetProduct("productId");
 ```
+
+## Adding a directive to buy a product
+
+```csharp
+using Alexa.NET.InSkillPricing.Directives
+...
+var buyDirective = new BuyDirective("amzn1.adg.productId", "correlationToken");
+
+var response = ResponseBuilder.Empty();
+response.Response.ShouldEndSession = true;
+
+response.Response.Directives.Add(buyDirective);
