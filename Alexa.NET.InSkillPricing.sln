@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.InSkillPricing", "Alexa.NET.InSkillPricing\Alexa.NET.InSkillPricing.csproj", "{12DB4181-2A99-45B2-8F56-FCE451D86A37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.InSkillPricing.Tests", "Alexa.NET.InSkillPricing.Tests\Alexa.NET.InSkillPricing.Tests.csproj", "{711C5545-6869-47E4-B685-9BEE6DB4D749}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12DB4181-2A99-45B2-8F56-FCE451D86A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DB4181-2A99-45B2-8F56-FCE451D86A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12DB4181-2A99-45B2-8F56-FCE451D86A37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{711C5545-6869-47E4-B685-9BEE6DB4D749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{711C5545-6869-47E4-B685-9BEE6DB4D749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{711C5545-6869-47E4-B685-9BEE6DB4D749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{711C5545-6869-47E4-B685-9BEE6DB4D749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

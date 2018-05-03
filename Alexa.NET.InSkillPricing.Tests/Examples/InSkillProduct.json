@@ -1,0 +1,8 @@
+﻿{
+  "productId": "amzn1.adg.product.some-id",
+  "type": "SUBSCRIPTION",
+  "name": "Friendly Name",
+  "summary": "Description of the product.",
+  "entitled": "NOT_ENTITLED",
+  "purchasable": "PURCHASABLE"
+}

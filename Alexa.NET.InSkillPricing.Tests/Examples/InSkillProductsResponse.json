@@ -1,0 +1,15 @@
+﻿{
+  "inSkillProducts": [
+    {
+      "productId": "amzn1.adg.product.some-id",
+      "referenceName": "ProductName",
+      "type": "SUBSCRIPTION",
+      "name": "Friendly Name",
+      "summary": "Description of the product.",
+      "entitled": "NOT_ENTITLED",
+      "purchasable": "PURCHASABLE"
+    }
+  ],
+  "isTruncated": true,
+  "nextToken": "abcdef"
+}
