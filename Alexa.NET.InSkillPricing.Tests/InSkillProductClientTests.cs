@@ -124,6 +124,76 @@ namespace Alexa.NET.InSkillPricing.Tests
             AssertDefaultProduct(response);
         }
 
+        [Fact]
+        public async Task InSkillProductClientGetProductsWithTokenReturnsResponse()
+        {
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+            {
+                Assert.Equal("/v1/users/~current/skills/~current/inSkillProducts?nextToken=abcdef", message.RequestUri.PathAndQuery);
+
+            }, Utility.ExampleFileContent<InSkillProductsResponse>("InSkillProductsResponse.json"))));
+
+            var response = await client.GetProducts("abcdef");
+
+            Assert.NotNull(response);
+        }
+
+        [Fact]
+        public async Task InSkillProductQueryOptionsGeneratedCorrectly()
+        {
+            var filters = new ProductFilters
+            {
+                Purchasable = PurchaseState.NotPurchasable,
+                Entitled = Entitlement.NotEntitled,
+                ProductType = ProductType.Entitlement,
+                MaxResults = 99
+            };
+
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request,new HttpClient(new ActionHandler(message =>
+            {
+                Assert.Equal(
+                    "/v1/users/~current/skills/~current/inSkillProducts?purchasable=NOT_PURCHASABLE&entitled=NOT_ENTITLED&productType=ENTITLEMENT&maxResults=99", 
+                    message.RequestUri.PathAndQuery);
+            },Utility.ExampleFileContent<InSkillProductsResponse>("InSkillProductsResponse.json"))));
+            var results = await client.GetProducts(filters);
+            Assert.Single(results.Products);
+        }
+
+        [Fact]
+        public async Task InSkillProductQueryOptionsGeneratesSingleFilterCorrectly()
+        {
+            var filters = new ProductFilters
+            {
+                MaxResults = 99
+            };
+
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+            {
+                Assert.Equal("/v1/users/~current/skills/~current/inSkillProducts?maxResults=99", message.RequestUri.PathAndQuery);
+            }, Utility.ExampleFileContent<InSkillProductsResponse>("InSkillProductsResponse.json"))));
+            var results = await client.GetProducts(filters);
+            Assert.Single(results.Products);
+        }
+
+        [Fact]
+        public async Task InSkillProductQueryOptionDoesntAllow101MaxResults()
+        {
+            var filters = new ProductFilters
+            {
+                MaxResults = 101
+            };
+
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+            {
+
+            }, Utility.ExampleFileContent<InSkillProductsResponse>("InSkillProductsResponse.json"))));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => client.GetProducts(filters));
+        }
+
         private SkillRequest DummyLaunchRequest()
         {
             return new SkillRequest
