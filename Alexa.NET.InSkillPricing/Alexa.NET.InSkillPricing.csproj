@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <Authors>Steven Pears</Authors>
+    <Company />
+    <Description>A simple package built to work with Alexa In Skill Products
+</Description>
+    <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
