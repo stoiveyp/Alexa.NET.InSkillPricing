@@ -102,9 +102,26 @@ namespace Alexa.NET.InSkillPricing.Tests
 
             var response = await client.GetProducts();
 
+            Assert.NotNull(response);
             Assert.Single(response.Products);
             Assert.True(response.IsTruncated);
             Assert.Equal("abcdef", response.NextToken);
+        }
+
+        [Fact]
+        public async Task InSkillProductClientGetProductReturnsResponse()
+        {
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+            {
+                Assert.Equal("/v1/users/~current/skills/~current/inSkillProducts/aaa", message.RequestUri.PathAndQuery);
+
+            }, Utility.ExampleFileContent<InSkillProduct>("InSkillProduct.json"))));
+
+            var response = await client.GetProduct("aaa");
+
+            Assert.NotNull(response);
+            AssertDefaultProduct(response);
         }
 
         private SkillRequest DummyLaunchRequest()

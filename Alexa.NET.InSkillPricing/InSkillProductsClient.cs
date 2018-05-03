@@ -52,5 +52,14 @@ namespace Alexa.NET
                 return Serializer.Deserialize<InSkillProductsResponse>(reader);
             }
         }
+
+        public async Task<InSkillProduct> GetProduct(string productId)
+        {
+            var response = await Client.GetStreamAsync($"{InSkillProductBasePath}/{productId}").ConfigureAwait(false);
+            using (var reader = new JsonTextReader(new StreamReader(response)))
+            {
+                return Serializer.Deserialize<InSkillProduct>(reader);
+            }
+        }
     }
 }
