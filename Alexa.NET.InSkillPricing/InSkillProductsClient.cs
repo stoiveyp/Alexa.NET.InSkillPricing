@@ -22,6 +22,7 @@ namespace Alexa.NET
 
         public InSkillProductsClient(SkillRequest request) : this(request, new HttpClient())
         {
+            
         }
 
         public InSkillProductsClient(SkillRequest request, HttpClient client) :
