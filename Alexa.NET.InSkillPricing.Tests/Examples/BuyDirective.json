@@ -1,0 +1,10 @@
+﻿{
+  "type": "Connections.SendRequest",
+  "name": "Buy",
+  "payload": {
+    "InSkillProduct": {
+      "productId": "amzn1.adg.product"
+    }
+  },
+  "token": "correlationToken"
+}
