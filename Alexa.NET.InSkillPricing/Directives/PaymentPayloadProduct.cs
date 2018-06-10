@@ -2,9 +2,11 @@
 
 namespace Alexa.NET.InSkillPricing.Directives
 {
-    public class BuyDirectivePayloadProduct
+    public class PaymentPayloadProduct
     {
-        public BuyDirectivePayloadProduct(string productId)
+        public PaymentPayloadProduct() { }
+
+        public PaymentPayloadProduct(string productId)
         {
             ProductId = productId;
         }

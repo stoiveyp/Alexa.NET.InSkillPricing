@@ -11,6 +11,9 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Rename object model
+Allow for cancellation and upselling</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace Alexa.NET.InSkillPricing.Tests
         [Fact]
         public void BuyDirectiveDeserializesCorrectly()
         {
-            var directive = Utility.ExampleFileContent<BuyDirective>("BuyDirective.json");
+            var directive = Utility.ExampleFileContent<PaymentDirective>("BuyDirective.json");
             Assert.Equal("Buy",directive.Name);
             Assert.Equal("Connections.SendRequest",directive.Type);
             Assert.Equal("correlationToken",directive.Token);
