@@ -38,4 +38,10 @@ response.Response.Directives.Add(buyDirective);
 using Alexa.NET.InSkillPricing.Responses
 ...
 ConnectionResponseHandler.AddToRequestConverter();
+...
+switch(request)
+{
+case ConnectionResponseRequest paymentDetail:
+//TODO: Handle payment here
+}
 ```
