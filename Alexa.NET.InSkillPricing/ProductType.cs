@@ -8,5 +8,6 @@ namespace Alexa.NET.InSkillPricing
     {
         public const string Subscription = "SUBSCRIPTION";
         public const string Entitlement = "ENTITLEMENT";
+        public const string Consumable = "CONSUMABLE";
     }
 }

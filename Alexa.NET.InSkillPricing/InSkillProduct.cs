@@ -24,5 +24,14 @@ namespace Alexa.NET.InSkillPricing
 
         [JsonProperty("entitled")]
         public string Entitled { get; set; }
+
+        [JsonProperty("referenceName")]
+        public string ReferenceName { get; set; }
+
+        [JsonProperty("activeEntitlementCount")]
+        public int ActiveEntitlementCount { get; set; }
+
+        [JsonProperty("purchaseMode")]
+        public string PurchaseMode { get; set; }
     }
 }
