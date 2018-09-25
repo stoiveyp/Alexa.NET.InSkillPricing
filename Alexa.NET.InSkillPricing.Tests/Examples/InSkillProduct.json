@@ -1,8 +1,11 @@
 ﻿{
-  "productId": "amzn1.adg.product.some-id",
-  "type": "SUBSCRIPTION",
+  "productId": "amzn1.adg.product.unique-id-1",
+  "referenceName": "your_product_name_1",
+  "type": "ENTITLEMENT",
   "name": "Friendly Name",
   "summary": "Description of the product.",
   "entitled": "NOT_ENTITLED",
-  "purchasable": "PURCHASABLE"
+  "purchasable": "PURCHASABLE",
+  "activeEntitlementCount": 1,
+  "purchaseMode": "TEST"
 }

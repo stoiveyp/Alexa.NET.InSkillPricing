@@ -10,7 +10,8 @@ namespace Alexa.NET.InSkillPricing.Tests
 {
     public class InSkillProductClientTests
     {
-        private const string ProductId = "amzn1.adg.product.some-id";
+        private const string ProductId = "amzn1.adg.product.unique-id-1";
+        private const string ReferenceName = "your_product_name_1";
         private const string ProductName = "Friendly Name";
         private const string ProductSummary = "Description of the product.";
         private const string NextToken = "abcdef";
@@ -29,11 +30,14 @@ namespace Alexa.NET.InSkillPricing.Tests
             var expected = new InSkillProduct
             {
                 Name = ProductName,
-                Type = ProductType.Subscription,
+                Type = ProductType.Entitlement,
                 ProductId = ProductId,
                 Summary = ProductSummary,
                 Entitled = Entitlement.NotEntitled,
-                Purchasable = PurchaseState.Purchasable
+                Purchasable = PurchaseState.Purchasable,
+                PurchaseMode = PurchaseMode.Test,
+                ReferenceName = ReferenceName,
+                ActiveEntitlementCount = 1
             };
 
             Assert.True(Utility.CompareJson(expected, "InSkillProduct.json"));
@@ -213,11 +217,14 @@ namespace Alexa.NET.InSkillPricing.Tests
         private void AssertDefaultProduct(InSkillProduct result)
         {
             Assert.Equal(ProductId, result.ProductId);
-            Assert.Equal(ProductType.Subscription, result.Type);
+            Assert.Equal(ProductType.Entitlement, result.Type);
             Assert.Equal(ProductName, result.Name);
             Assert.Equal(ProductSummary, result.Summary);
             Assert.Equal(Entitlement.NotEntitled, result.Entitled);
             Assert.Equal(PurchaseState.Purchasable, result.Purchasable);
+            Assert.Equal(ReferenceName, result.ReferenceName);
+            Assert.Equal(1, result.ActiveEntitlementCount);
+            Assert.Equal(PurchaseMode.Test,result.PurchaseMode);
         }
     }
 }
