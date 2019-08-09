@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <PackageReleaseNotes>Add Consumable to ProductType
 Added ReferenceName, ActiveEntitlementCount &amp; PurchaseMode to InSkillProduct</PackageReleaseNotes>
   </PropertyGroup>
