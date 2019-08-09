@@ -1,11 +1,26 @@
 ﻿using System.Text;
 using Alexa.NET.Response;
+using Alexa.NET.Response.Converters;
 using Newtonsoft.Json;
 
 namespace Alexa.NET.InSkillPricing.Directives
 {
     public class PaymentDirective:IDirective
     {
+        private const string DirectiveType = "Connections.SendRequest";
+        private static readonly object directiveadd = new object();
+
+        public static void AddSupport()
+        {
+            lock (directiveadd)
+            {
+                if (!DirectiveConverter.TypeFactories.ContainsKey(DirectiveType))
+                {
+                    DirectiveConverter.TypeFactories.Add(DirectiveType, () => new PaymentDirective());
+                }
+            }
+        }
+
         public PaymentDirective() { }
 
         public PaymentDirective(string paymentType, string correlationToken, PaymentPayload payload)
@@ -16,7 +31,7 @@ namespace Alexa.NET.InSkillPricing.Directives
         }
 
         [JsonProperty("type")]
-        public string Type => "Connections.SendRequest";
+        public string Type => DirectiveType;
 
         [JsonProperty("name")] public string Name { get; set; }
 

@@ -8,6 +8,7 @@ namespace Alexa.NET.InSkillPricing.Tests
         [Fact]
         public void ConnectionResponseRequestDeserializesProperly()
         {
+            ConnectionResponseHandler.AddToRequestConverter();
             var request = Utility.ExampleFileContent<ConnectionResponseRequest>("ConnectionResponseRequest.json");
 
             Assert.Equal("Upsell", request.Name);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Alexa.NET.Helpers;
+using Alexa.NET.InSkillPricing.Directives;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,6 +24,7 @@ namespace Alexa.NET.InSkillPricing.Tests
 
         public static T ExampleFileContent<T>(string expectedFile)
         {
+            PaymentDirective.AddSupport();
             using (var reader = new JsonTextReader(new StringReader(ExampleFileContent(expectedFile))))
             {
                 return new JsonSerializer().Deserialize<T>(reader);

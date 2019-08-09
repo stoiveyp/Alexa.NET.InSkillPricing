@@ -1,6 +1,11 @@
 # Alexa.NET.InSkillPricing
 A simple package built to work with Alexa In Skill Products
 
+## Add Directive Support
+```csharp
+	PaymentDirective.AddSupport();
+```
+
 ## Getting all products for the current user and skill
 
 ```csharp
