@@ -2,6 +2,7 @@
 {
     public class CancelDirective : PaymentDirective
     {
+        public CancelDirective() { }
         public CancelDirective(string productId, string token) :
             base(PaymentType.Cancel, token, new PaymentPayload(productId))
         {

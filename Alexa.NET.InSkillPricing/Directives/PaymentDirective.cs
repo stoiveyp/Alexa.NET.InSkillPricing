@@ -1,11 +1,14 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
+using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Converters;
+using Alexa.NET.Response.Directive;
 using Newtonsoft.Json;
 
 namespace Alexa.NET.InSkillPricing.Directives
 {
-    public class PaymentDirective:IDirective
+    public class PaymentDirective: ConnectionSendRequest<PaymentPayload>,IEndSessionDirective
     {
         private const string DirectiveType = "Connections.SendRequest";
         private static readonly object directiveadd = new object();
@@ -18,6 +21,27 @@ namespace Alexa.NET.InSkillPricing.Directives
                 {
                     DirectiveConverter.TypeFactories.Add(DirectiveType, () => new PaymentDirective());
                 }
+
+                AddRequests();
+            }
+        }
+
+        private static void AddRequests()
+        {
+            if (ConnectionSendRequestFactory.Handlers.All(c => c.GetType() != typeof(BuyConnectionRequestHandler)))
+            {
+                ConnectionSendRequestFactory.Handlers.Add(new BuyConnectionRequestHandler());
+            }
+
+            if (ConnectionSendRequestFactory.Handlers.All(c => c.GetType() != typeof(UpsellConnectionRequestHandler)))
+            {
+                ConnectionSendRequestFactory.Handlers.Add(new UpsellConnectionRequestHandler());
+            }
+
+
+            if (ConnectionSendRequestFactory.Handlers.All(c => c.GetType() != typeof(CancelConnectionRequestHandler)))
+            {
+                ConnectionSendRequestFactory.Handlers.Add(new CancelConnectionRequestHandler());
             }
         }
 
@@ -30,13 +54,9 @@ namespace Alexa.NET.InSkillPricing.Directives
             Token = correlationToken;
         }
 
-        [JsonProperty("type")]
-        public string Type => DirectiveType;
+        [JsonProperty("token")]
+        public string Token { get; set; }
 
-        [JsonProperty("name")] public string Name { get; set; }
-
-        [JsonProperty("token")] public string Token { get; set; }
-
-        [JsonProperty("payload")] public PaymentPayload Payload { get; set; }
+        public bool? ShouldEndSession => true;
     }
 }

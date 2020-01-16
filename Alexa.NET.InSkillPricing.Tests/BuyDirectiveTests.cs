@@ -25,6 +25,9 @@ namespace Alexa.NET.InSkillPricing.Tests
             Assert.Equal("Connections.SendRequest",directive.Type);
             Assert.Equal("correlationToken",directive.Token);
             Assert.Equal("amzn1.adg.product",directive.Payload.InSkillProduct.ProductId);
+            var response = ResponseBuilder.Empty();
+            response.Response.Directives.Add(directive);
+            Assert.True(response.Response.ShouldEndSession);
         }
 
     }
