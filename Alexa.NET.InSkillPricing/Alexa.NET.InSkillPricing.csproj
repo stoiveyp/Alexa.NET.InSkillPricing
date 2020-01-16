@@ -10,13 +10,15 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.0</Version>
-    <PackageReleaseNotes>Update to NetStandard2.0 and latest Alexa.NET reference</PackageReleaseNotes>
+    <Version>3.0.0</Version>
+    <PackageReleaseNotes>Update to Alexa.NET 1.12.0
+  - Types for Connections.SendRequest and Connection.Response are now coming from Alexa.NET
+  - Some types will be coming from the Alexa.NET namespaces so updates may be required, hence the major bump</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alexa.NET" Version="1.8.0" />
+    <PackageReference Include="Alexa.NET" Version="1.12.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
