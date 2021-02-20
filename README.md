@@ -42,7 +42,7 @@ response.Response.Directives.Add(buyDirective);
 ```csharp
 using Alexa.NET.InSkillPricing.Responses
 ...
-ConnectionResponseHandler.AddToRequestConverter();
+ConnectionRequestHandler.AddToRequestConverter();
 ...
 switch(request)
 {
