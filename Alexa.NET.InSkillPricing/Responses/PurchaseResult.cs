@@ -10,5 +10,6 @@ namespace Alexa.NET.InSkillPricing.Responses
         public const string Declined = "DECLINED";
         public const string AlreadyPurchased = "ALREADY_PURCHASED";
         public const string Error = "ERROR";
+        public const string PendingPurchase = "PENDING_PURCHASE";
     }
 }
