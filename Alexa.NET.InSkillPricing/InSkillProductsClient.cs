@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Alexa.NET.InSkillPricing;
@@ -16,7 +20,11 @@ namespace Alexa.NET
     {
         public HttpClient Client { get; }
 
-        private const string InSkillProductBasePath = "/v1/users/~current/skills/~current/inSkillProducts";
+        public const string ISPBasePath = "/v1/users/~current/skills/~current";
+
+        public const string InSkillProductsAPI = "/inSkillProducts";
+        public const string VoicePurchasingAPI = "/settings/voicePurchasing.enabled";
+        public const string TransactionsAPI = "/inSkillProductsTransactions";
 
         private static readonly JsonSerializer Serializer = JsonSerializer.CreateDefault();
 
@@ -50,7 +58,7 @@ namespace Alexa.NET
         public async Task<InSkillProductsResponse> GetProducts(string nextToken = null)
         {
             var query = string.IsNullOrWhiteSpace(nextToken) ? string.Empty : "?nextToken=" + nextToken;
-            var response = await Client.GetStreamAsync(InSkillProductBasePath + query).ConfigureAwait(false);
+            var response = await Client.GetStreamAsync(ISPBasePath + InSkillProductsAPI + query).ConfigureAwait(false);
             using (var reader = new JsonTextReader(new StreamReader(response)))
             {
                 return Serializer.Deserialize<InSkillProductsResponse>(reader);
@@ -94,7 +102,7 @@ namespace Alexa.NET
             }
 
 
-            var response = await Client.GetStreamAsync(InSkillProductBasePath + query).ConfigureAwait(false);
+            var response = await Client.GetStreamAsync($"{ISPBasePath}{InSkillProductsAPI}{query}").ConfigureAwait(false);
             using (var reader = new JsonTextReader(new StreamReader(response)))
             {
                 return Serializer.Deserialize<InSkillProductsResponse>(reader);
@@ -103,11 +111,86 @@ namespace Alexa.NET
 
         public async Task<InSkillProduct> GetProduct(string productId)
         {
-            var response = await Client.GetStreamAsync($"{InSkillProductBasePath}/{productId}").ConfigureAwait(false);
+            var response = await Client.GetStreamAsync($"{ISPBasePath}{InSkillProductsAPI}/{productId}").ConfigureAwait(false);
             using (var reader = new JsonTextReader(new StreamReader(response)))
             {
                 return Serializer.Deserialize<InSkillProduct>(reader);
             }
+        }
+
+        public async Task<bool> VoicePurchasingEnabled()
+        {
+            var response = await Client.GetStringAsync($"{ISPBasePath}{VoicePurchasingAPI}").ConfigureAwait(false);
+            return bool.Parse(response);
+        }
+
+        public Task<TransactionResponse> Transactions(string productId)
+        {
+            return Transactions(new TransactionRequest(productId));
+        }
+
+        public Task<TransactionResponse> Transactions(string productId, string nextToken)
+        {
+            return Transactions(new TransactionRequest(productId) {NextToken = nextToken});
+        }
+
+        public async Task<TransactionResponse> Transactions(TransactionRequest request)
+        {
+            var osb = new StringBuilder(50);
+
+            void NewParam(string key, string value)
+            {
+                if (osb.Length > 0)
+                {
+                    osb.Append('&');
+                }
+                osb.Append(key);
+                osb.Append('=');
+                osb.Append(WebUtility.UrlEncode(value));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.ProductId))
+            {
+                NewParam("productId",request.ProductId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.NextToken))
+            {
+                NewParam("nextToken", request.NextToken);
+            }
+
+            if (request.Status.HasValue)
+            {
+                NewParam("status", ToEnumString(typeof(TransactionStatus), request.Status.Value));
+            }
+
+            if (request.MaxResults.HasValue)
+            {
+                NewParam("maxResults", request.MaxResults.Value.ToString());
+            }
+
+            if (request.FromModifiedDateTime.HasValue)
+            {
+                NewParam("fromLastModifiedTime", request.FromModifiedDateTime.Value.ToString("O"));
+            }
+
+            if (request.ToModifiedDateTime.HasValue)
+            {
+                NewParam("toLastModifiedTime", request.ToModifiedDateTime.Value.ToString("O"));
+            }
+
+            var response = await Client.GetStreamAsync($"{TransactionsAPI}?{osb}").ConfigureAwait(false);
+            using (var reader = new JsonTextReader(new StreamReader(response)))
+            {
+                return Serializer.Deserialize<TransactionResponse>(reader);
+            }
+        }
+
+        private static string ToEnumString(Type enumType, object type)
+        {
+            var name = Enum.GetName(enumType, type);
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetTypeInfo().GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).FirstOrDefault();
+            return enumMemberAttribute?.Value ?? type.ToString();
         }
     }
 }

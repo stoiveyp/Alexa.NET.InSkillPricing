@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "status": "PENDING_APPROVAL_BY_PARENT",
+      "productId": "amzn1.adg.product.unique-id-4",
+      "createdTime": "2018-11-23T12:23:10.52Z",
+      "lastModifiedTime": "2018-11-23T12:23:10.52Z"
+    },
+    {
+      "status": "PENDING_APPROVAL_BY_PARENT",
+      "productId": "amzn1.adg.product.unique-id-3",
+      "createdTime": "2018-11-23T11:21:10.52Z",
+      "lastModifiedTime": "2018-11-23T11:21:10.52Z"
+    },
+    {
+      "status": "EXPIRED_NO_ACTION_BY_PARENT",
+      "productId": "amzn1.adg.product.unique-id-3",
+      "createdTime": "2018-11-20T12:23:10.52Z",
+      "lastModifiedTime": "2018-11-21T12:23:10.52Z"
+    },
+    {
+      "status": "DENIED_BY_PARENT",
+      "productId": "amzn1.adg.product.unique-id-2",
+      "createdTime": "2018-11-15T11:03:07.52Z",
+      "lastModifiedTime": "2018-11-15T11:03:08.52Z"
+    },
+    {
+      "status": "APPROVED_BY_PARENT",
+      "productId": "amzn1.adg.product.unique-id-1",
+      "createdTime": "2018-11-14T22:21:00.52Z",
+      "lastModifiedTime": "2018-11-14T22:22:00.52Z"
+    }
+  ],
+  "metadata": {
+    "resultSet": {
+      "nextToken": "EXAMPLE123456789ABCDEFGHI"
+    }
+  }
+}

@@ -10,8 +10,8 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
-    <PackageReleaseNotes>Added PENDING_PURCHASE status (thanks @jbiams77)</PackageReleaseNotes>
+    <Version>3.1.0</Version>
+    <PackageReleaseNotes>Add support for VoicePurchasing and Transactions API</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
