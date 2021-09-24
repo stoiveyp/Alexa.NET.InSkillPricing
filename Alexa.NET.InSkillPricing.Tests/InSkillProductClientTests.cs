@@ -34,6 +34,7 @@ namespace Alexa.NET.InSkillPricing.Tests
                 ProductId = ProductId,
                 Summary = ProductSummary,
                 Entitled = Entitlement.NotEntitled,
+                EntitledReason = EntitledReason.NotPurchased,
                 Purchasable = PurchaseState.Purchasable,
                 PurchaseMode = PurchaseMode.Test,
                 ReferenceName = ReferenceName,

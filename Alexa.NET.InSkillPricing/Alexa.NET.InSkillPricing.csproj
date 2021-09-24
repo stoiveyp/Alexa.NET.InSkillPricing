@@ -10,9 +10,10 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.InSkillPricing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
-    <PackageReleaseNotes>Added PENDING_PURCHASE status (thanks @jbiams77)</PackageReleaseNotes>
+    <Version>3.2.0</Version>
+    <PackageReleaseNotes>Add entitledReason to InSkillProduct</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,10 @@
 
   <ItemGroup>
     <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

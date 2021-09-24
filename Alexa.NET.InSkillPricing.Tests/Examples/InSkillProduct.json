@@ -6,6 +6,7 @@
   "summary": "Description of the product.",
   "entitled": "NOT_ENTITLED",
   "purchasable": "PURCHASABLE",
+  "entitledReason": "NOT_PURCHASED",
   "activeEntitlementCount": 1,
   "purchaseMode": "TEST"
 }
