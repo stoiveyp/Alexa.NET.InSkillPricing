@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Alexa.NET.Request;
@@ -88,7 +89,7 @@ namespace Alexa.NET.InSkillPricing.Tests
                  Assert.Equal("en-GB",message.Headers.AcceptLanguage.First().Value);
                  Assert.Equal("Bearer", message.Headers.Authorization.Scheme);
                  Assert.Equal("abcdef", message.Headers.Authorization.Parameter);
-                 Assert.Equal("api.alexa.com",message.RequestUri.Host);
+                 Assert.Equal("api.eu.amazonalexa.com",message.RequestUri.Host);
                  Assert.Equal("https",message.RequestUri.Scheme);
              },Utility.ExampleFileContent<InSkillProductsResponse>("InSkillProductsResponse.json"))));
 
@@ -199,6 +200,69 @@ namespace Alexa.NET.InSkillPricing.Tests
             await Assert.ThrowsAsync<InvalidOperationException>(() => client.GetProducts(filters));
         }
 
+        [Fact]
+        public async Task VoicePurchasing()
+        {
+            //https://developer.amazon.com/en-US/docs/alexa/in-skill-purchase/isp-kid-skills.html#voicePurchasing-api
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+            {
+                Assert.Equal(message.RequestUri, new Uri($"{request.Context.System.ApiEndpoint}/v1/users/~current/skills/~current/settings/voicePurchasing.enabled"));
+                Assert.Equal(HttpMethod.Get, message.Method);
+                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+                    {Content = new StringContent(true.ToString())});
+            })));
+            var result = await client.VoicePurchasingEnabled();
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task TransactionsWithProduct()
+        {
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+                {
+                    Assert.Equal($"{InSkillProductsClient.TransactionsAPI}?productId=productid", message.RequestUri.PathAndQuery);
+                },
+                Utility.ExampleFileContent<TransactionResponse>("TransactionResponse.json"))));
+            var response = await client.Transactions("productid");
+            Utility.CompareJson(response, "TransactionResponse.json");
+        }
+
+        [Fact]
+        public async Task TransactionsWithProductAndNextToken()
+        {
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+                {
+                    Assert.Equal($"{InSkillProductsClient.TransactionsAPI}?productId=productid&nextToken=ABCDEFGH", message.RequestUri.PathAndQuery);
+                },
+                Utility.ExampleFileContent<TransactionResponse>("TransactionResponse.json"))));
+            var response = await client.Transactions("productid", "ABCDEFGH");
+            Utility.CompareJson(response, "TransactionResponse.json");
+        }
+
+        [Fact]
+        public async Task TransactionsWithRequest()
+        {
+            var request = DummyLaunchRequest();
+            var client = new InSkillProductsClient(request, new HttpClient(new ActionHandler(message =>
+                {
+                    Assert.Equal($"{InSkillProductsClient.TransactionsAPI}?productId=ABC&nextToken=DEF&status=EXPIRED_NO_ACTION_BY_PARENT&maxResults=50&fromLastModifiedTime={WebUtility.UrlEncode(DateTime.UnixEpoch.ToString("O"))}&toLastModifiedTime={WebUtility.UrlEncode(DateTime.UnixEpoch.AddDays(1).ToString("O"))}", message.RequestUri.PathAndQuery);
+                },
+                Utility.ExampleFileContent<TransactionResponse>("TransactionResponse.json"))));
+            var response = await client.Transactions(new TransactionRequest
+            {
+                ProductId = "ABC",
+                Status = TransactionStatus.ExpiredNoActionByParent,
+                MaxResults = 50,
+                FromModifiedDateTime = DateTime.UnixEpoch,
+                ToModifiedDateTime = DateTime.UnixEpoch.AddDays(1),
+                NextToken = "DEF"
+            });
+            Utility.CompareJson(response, "TransactionResponse.json");
+        }
+
         private SkillRequest DummyLaunchRequest()
         {
             return new SkillRequest
@@ -209,7 +273,7 @@ namespace Alexa.NET.InSkillPricing.Tests
                     System = new AlexaSystem
                     {
                         ApiAccessToken = "abcdef",
-                        ApiEndpoint = "https://api.alexa.com"
+                        ApiEndpoint = "https://api.eu.amazonalexa.com"
                     }
                 }
             };
